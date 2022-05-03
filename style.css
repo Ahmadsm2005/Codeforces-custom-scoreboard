@@ -1,0 +1,29 @@
+#EOIers{
+font-size:1.5em;
+width: 100%;
+border-collapse: collapse;
+}
+#EOIers td,#EOIers th{
+border: 2px solid #000000;
+padding-right: 1.6vw;
+padding-left: 1.6vw;
+padding-top: 0.8vw;
+padding-bottom: 0.8vw;
+}
+.th{
+font-size:1.1em;
+text-align: center;
+border: 2px solid #000000;
+padding-right: 1.6vw;
+padding-left: 1.6vw;
+padding-top: 0.8vw;
+padding-bottom: 0.8vw;
+background-image: linear-gradient(#d000ff,#8f07ad);
+color: #00FF00;
+}
+#EOIers th{
+background-image: linear-gradient(#d000ff,#8f07ad);
+color: #00FF00;
+}
+#EOIers tr:nth-child(even){background-color: #d0d0d0}
+#EOIers tr:hover {background-color: #b0edf5;}
