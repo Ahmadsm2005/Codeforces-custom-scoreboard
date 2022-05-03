@@ -2,64 +2,64 @@
 <html>
 <link rel="stylesheet" href="style.css">
 <table id="EOIers">
-<tr>
-<th>Rank</th>
-<th>Name</th>
-</tr>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+  </tr>
 </table>
 <script>
-function CMP(A,B){
-return B[0]-A[0];
+function CMP(A, B) {
+  return B[0] - A[0];
 }
-let socket = new WebSocket("ws://41.234.180.35:2999");
+let socket = new WebSocket("ws://xx.xxx.xxx.xx:2999"); //change this to the I.P address of the hosting server
 var table = document.getElementById("EOIers");
-var FR=table.rows[0];
-let SCORE=[100,100,200,200,300,300,400,400,400],TOTAL=0;
-for(let i=0;i<SCORE.length;i++){
-TOTAL+=SCORE[i];
-var CELL=FR.insertCell(i+2);
-CELL.className="th";
-CELL.innerHTML=String.fromCharCode(65+i)+'<br>'+SCORE[i];
+var FR = table.rows[0];
+let SCORE = [100, 100, 200, 200, 300, 300, 400, 400, 400]; //Modify this according to the score of each problem(you can change its length if you want)
+let TOTAL = 0;
+for(let i = 0; i < SCORE.length; i++) {
+  TOTAL += SCORE[i];
+  var CELL = FR.insertCell(i + 2);
+  CELL.className = "th";
+  CELL.innerHTML = String.fromCharCode(65 + i) + '<br>' + SCORE[i];
 }
-var CELL=FR.insertCell(SCORE.length+2);
-CELL.className="th";
-CELL.innerHTML="Total"+'<br>'+TOTAL;
-let AM=0;
-socket.onmessage=function(e){
-let ARR=[];
-let F=JSON.parse(e.data);
-while(AM){
-table.deleteRow(-1);
-AM--;
-}
-let LSTRANK=0,PP=-1;
-AM=F.rows.length;
-for(let i=0;i<F.rows.length;i++){
-let TOTAL=0;
-for(let l=0;l<F.rows[i].problemResults.length;l++)
-TOTAL+=F.rows[i].problemResults[l].points*SCORE[l];
-ARR.push([TOTAL,F.rows[i]]);
-}
-ARR.sort(CMP);
-for(let i=0;i<F.rows.length;i++){
-let ROW=table.insertRow(i+1);
-let TOTAL=0;
-for(let l=0;l<ARR[i][1].problemResults.length;l++)
-TOTAL+=ARR[i][1].problemResults[l].points*SCORE[l];
-if(TOTAL!=PP)
-LASTRANK=i+1,PP=TOTAL;
-let CELL=ROW.insertCell(0);
-CELL.innerHTML=LASTRANK;
-CELL=ROW.insertCell(1);
-CELL.innerHTML=ARR[i][1].party.members[0].handle;
-for(let l=0;l<ARR[i][1].problemResults.length;l++){
-CELL=ROW.insertCell(l+2);
-CELL.innerHTML=ARR[i][1].problemResults[l].points*SCORE[l];
-}
-CELL=ROW.insertCell(ARR[i][1].problemResults.length+2);
-CELL.innerHTML=TOTAL;
-CELL.style.color="#00aa00";
-}
+var CELL = FR.insertCell(SCORE.length + 2);
+CELL.className = "th";
+CELL.innerHTML = "Total" + '<br>' + TOTAL;
+let AM = 0;
+socket.onmessage = function(e) {
+  let ARR = [];
+  let F = JSON.parse(e.data);
+  while(AM) {
+    table.deleteRow(-1);
+    AM--;
+  }
+  let LSTRANK = 0,
+    PP = -1;
+  AM = F.rows.length;
+  for(let i = 0; i < F.rows.length; i++) {
+    let TOTAL = 0;
+    for(let l = 0; l < F.rows[i].problemResults.length; l++) TOTAL += F.rows[i].problemResults[l].points * SCORE[l];
+    ARR.push([TOTAL, F.rows[i]]);
+  }
+  ARR.sort(CMP);
+  for(let i = 0; i < F.rows.length; i++) {
+    let ROW = table.insertRow(i + 1);
+    let TOTAL = 0;
+    for(let l = 0; l < ARR[i][1].problemResults.length; l++) TOTAL += ARR[i][1].problemResults[l].points * SCORE[l];
+    if(TOTAL != PP) LASTRANK = i + 1, PP = TOTAL;
+    let CELL = ROW.insertCell(0);
+    CELL.innerHTML = LASTRANK;
+    CELL = ROW.insertCell(1);
+    CELL.innerHTML = ARR[i][1].party.members[0].handle;
+    for(let l = 0; l < ARR[i][1].problemResults.length; l++) {
+      CELL = ROW.insertCell(l + 2);
+      CELL.innerHTML = ARR[i][1].problemResults[l].points * SCORE[l];
+    }
+    CELL = ROW.insertCell(ARR[i][1].problemResults.length + 2);
+    CELL.innerHTML = TOTAL;
+    CELL.style.color = "#00aa00";
+  }
 }
 </script>
+
 </html>
