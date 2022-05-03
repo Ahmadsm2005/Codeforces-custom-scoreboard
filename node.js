@@ -20,8 +20,8 @@ async function heartbeat() {
   const d = new Date();
     var Z = "https://codeforces.com/api/contest.standings?contestId=362075&apiKey={insert public API key here}&time=";
     Z += TIME;
-    Z += "&apiSig=222222"; //API signature
-    var Q = "111111/contest.standings?apiKey={insert public API key here}&contestId=362075&time=";
+    Z += "&apiSig=xxxxxx"; //API signature
+    var Q = "xxxxxx/contest.standings?apiKey={insert public API key here}&contestId=362075&time="; //replace xxxxxx by API signature
     Q += TIME;
     Q += "{insert secret API key here}"
     var X = sha512(Q); //SHA512 hash for API request. Read this for more details: https://codeforces.com/apiHelp
